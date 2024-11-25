@@ -1,2 +1,2 @@
-# Human-Resource-System-Vue3
-test 
+运行该项目，需要在该目录终端输入 npm install (默认没有node_modules目录，如果不是首次运行就不用)
+然后 npm ren dev 运行起来
