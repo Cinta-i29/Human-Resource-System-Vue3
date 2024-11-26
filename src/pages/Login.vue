@@ -1,17 +1,18 @@
 <template>
   <div class="layout-container">
     <div class="loginForm">
+      <el-icon color="#CAE6FC" :size="30"><UserFilled /></el-icon>
+      <div class="loginTitle">人力资源管理系统</div>
       <el-form
         label-width="auto"
-        :model="formData"
+        :model="loginFormData"
         style="max-width: 600px"
-        ref="formDataRef"
       >
         <el-form-item>
-          <el-input v-model="formData.username" placeholder="用户名"/>
+          <el-input v-model="loginFormData.username" placeholder="用户名"/>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="formData.password" placeholder="密码"/>
+          <el-input v-model="loginFormData.password" placeholder="密码"/>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm" style="width: 100%">
@@ -23,22 +24,30 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref } from 'vue';
+import { ElMessage } from 'element-plus';
+import { ref } from 'vue';
+import request from '@/utils/request';
 
-const formDataRef = ref();
-const formData = reactive({
+const loginFormData = ref({
   username: "",
   password:"",
 })
 
 const submitForm = async () => {
-  if (!formDataRef.value) {
-    console.log('表单实例不存在');
-    return;
+  if (loginFormData.username == "" || loginFormData.password == "") {
+    return ElMessage.error("用户名或密码不能为空");
   }
-  
-  console.log('表单实例：', formDataRef.value);
-  console.log('表单数据：', formData);
+  try {
+    const res = await request.post("/user/login", loginFormData.value);
+    if (res.code == 200) {
+      localStorage.setItem("token", res.data.token);
+    } else {
+      ElMessage.error(res.msg)
+    }
+  } catch (error) { 
+    console.error("登陆失败" + error);
+    ElMessage.error("登陆失败");
+  }
 }
 </script>
 <style scoped>
@@ -54,6 +63,15 @@ const submitForm = async () => {
 .loginForm{
   background-color: #fff;
   padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginTitle{
+  color: #373837;
+  margin: 20px 0;
 }
 
 :deep(.el-button) {
