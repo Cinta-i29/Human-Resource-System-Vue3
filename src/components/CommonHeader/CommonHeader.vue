@@ -32,7 +32,7 @@ import { ArrowDown } from '@element-plus/icons-vue';
 
 .title{
   font-weight: bold;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .el-dropdown-link {
