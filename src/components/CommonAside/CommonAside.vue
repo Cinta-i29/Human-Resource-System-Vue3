@@ -1,9 +1,10 @@
 <template>
   <div>
     <el-menu
-        default-active="2"
+        :default-active="defaultActive"
         class="el-menu-vertical-demo"
         router
+        unique-opened
     >
         <!-- 遍历主列表 -->
         <template v-for="item in list" :key="item.id">
@@ -30,7 +31,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, computed } from 'vue';
 
 const props = defineProps({
     list: {
@@ -39,7 +40,11 @@ const props = defineProps({
     }
 })
 
+// 计算默认激活的菜单项
+const defaultActive = computed(() => {
+    return props.list[0]?.path || ''; // 返回第一个菜单项的路径
+});
 </script>
-<style scoped>
 
+<style scoped>
 </style>

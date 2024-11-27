@@ -13,7 +13,7 @@ request.interceptors.request.use(
     (request) => { 
         const token = localStorage.getItem("token");
         if (token != null && token != "") {
-            request.headers["token"] = token;
+            request.headers["Authorization"] = token;
         }
         return request;
     }

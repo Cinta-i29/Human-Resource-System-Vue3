@@ -26,27 +26,36 @@
 <script setup>
 import { ElMessage } from 'element-plus';
 import { ref } from 'vue';
-import request from '@/utils/request';
+import { login } from '@/api/user';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '@/store/user';
 
+const router = useRouter();
+const userStore = useUserStore();
 const loginFormData = ref({
   username: "",
-  password:"",
+  password: "",
 })
 
 const submitForm = async () => {
-  if (loginFormData.username == "" || loginFormData.password == "") {
+  if (!loginFormData.value.username || !loginFormData.value.password) {
     return ElMessage.error("用户名或密码不能为空");
   }
   try {
-    const res = await request.post("/user/login", loginFormData.value);
-    if (res.code == 200) {
+    const res = await login(loginFormData.value);
+    if (res.code === 200) {
+      userStore.setUserInfo(res.data);
       localStorage.setItem("token", res.data.token);
+      ElMessage.success("登录成功");
+      if (res.data.role === "Administrator") {
+        router.push('/system');
+      }
     } else {
-      ElMessage.error(res.msg)
+      ElMessage.error(res.msg || "登录失败");
     }
   } catch (error) { 
-    console.error("登陆失败" + error);
-    ElMessage.error("登陆失败");
+    console.error("登录失败:", error);
+    ElMessage.error("登录失败，请稍后重试");
   }
 }
 </script>

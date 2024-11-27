@@ -5,10 +5,10 @@
             <common-header></common-header>
         </el-header>
         <el-container>
-          <el-aside width="150px">
+          <el-aside width="150px" class="aside-container">
             <common-aside :list="list"></common-aside>
           </el-aside>
-          <el-main>
+          <el-main class="main-container">
               <router-view></router-view>
           </el-main>
         </el-container>
@@ -17,13 +17,18 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import CommonHeader from '@/components/CommonHeader/CommonHeader.vue';
 import CommonAside from '@/components/CommonAside/CommonAside.vue';
+
+const router = useRouter();
+
 const list = [
   {
     id: "system-auth",
     path: "/system/authorization",
-    name: "权限管理",
+    name: "用户管理",
     children: []
   },
   {
@@ -33,12 +38,25 @@ const list = [
     children: []
   },
   {
+    id: "system-position",
+    path: "/system/pisition",
+    name: "职位管理",
+    children: []
+  },
+  {
     id: "system-comp",
     path: "/system/compensation",
     name: "薪酬项目管理",
     children: []
-  },
+  }
 ]
+
+// 组件挂载时，如果当前路径是 /system，则自动跳转到第一个菜单项
+onMounted(() => {
+  if (router.currentRoute.value.path === '/system') {
+    router.push(list[0].path);
+  }
+});
 </script>
 
 <style scoped>
@@ -47,7 +65,13 @@ const list = [
 }
 
 .header-container {
-    padding: 0;  /* 移除el-header的内边距 */
+  padding: 0;  /* 移除el-header的内边距 */
+  background: linear-gradient(to right, #1485FE, #7F80FF);
+}
+
+
+.main-container{
+  background-color: #F2F2F2;
 }
 
 :deep(.el-header) {
