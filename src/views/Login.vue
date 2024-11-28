@@ -49,6 +49,8 @@ const submitForm = async () => {
       ElMessage.success("登录成功");
       if (res.data.role === "Administrator") {
         router.push('/system');
+      } else if (res.data.role === "HR-Specialist" || res.data.role === "HR-Manager") {
+        router.push("/personelManagement");
       }
     } else {
       ElMessage.error(res.msg || "登录失败");
