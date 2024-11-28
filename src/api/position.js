@@ -2,7 +2,7 @@ import request from "@/utils/request";
 
 // 获取所有职位
 export const getAllPositions = async () => {
-  return await request.get("/position/all");
+  return await request.post("/position/list");
 };
 
 // 新增职位
@@ -12,7 +12,7 @@ export const addPosition = async (position) => {
 
 // 删除职位
 export const deletePosition = async (id) => {
-  return await request.delete(`/position/delete/${id}`);
+  return await request.delete(`/position/${id}`);
 };
 
 // 修改职位信息

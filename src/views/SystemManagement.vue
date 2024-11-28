@@ -39,7 +39,7 @@ const list = [
   },
   {
     id: "system-position",
-    path: "/system/pisition",
+    path: "/system/position",
     name: "职位管理",
     children: []
   },

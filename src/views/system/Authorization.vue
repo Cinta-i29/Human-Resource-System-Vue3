@@ -111,6 +111,8 @@ const getUsers = async () => {
   console.log(res);
   if (res.code === 200) {
     userList.value = res.data;
+  } else {
+    console.log(res.msg);
   }
 }
 
@@ -152,6 +154,8 @@ const handleDelete = (row) => {
       if (res.code === 200) {
         ElMessage.success("删除成功");
         getUsers();
+      } else {
+        ElMessage.success(res.msg);
       }
     } catch (error) {
       ElMessage.error('删除失败');
