@@ -8,36 +8,35 @@ const routes = [
     component: () => import("@/views/Login.vue"),
   },
   {
-    path: "/systemManagement",
-    name: "systemManagement",
-    component: () => import("@/views/SystemManagement.vue"),
-  },
-  {
-    path: "/personelManagement",
-    name: "personelManagement",
-    component: () => import("@/views/PersonelManagement.vue"),
-  },
-  {
     path: "/system",
     component: () => import("@/views/SystemManagement.vue"),
     children: [
       {
         path: "authorization",
+        name: "authorization",
         component: () => import("@/views/system/Authorization.vue"),
       },
       {
         path: "organization",
+        name: "organization",
         component: () => import("@/views/system/Organization.vue"),
       },
       {
         path: "compensation",
+        name: "compensation",
         component: () => import("@/views/system/Compensation.vue"),
       },
       {
         path: "position",
+        name: "position",
         component: () => import("@/views/system/Position.vue"),
       },
     ],
+  },
+  {
+    path: "/personelManagement",
+    name: "personelManagement",
+    component: () => import("@/views/PersonelManagement.vue"),
   },
 ];
 
