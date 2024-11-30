@@ -1,0 +1,11 @@
+# 构建输出目录
+dist
+build
+
+# 依赖目录
+node_modules
+
+# 其他不需要格式化的文件
+*.md
+*.yml
+*.log 

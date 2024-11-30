@@ -14,7 +14,7 @@ const app = createApp(App);
 // 创建pinia实例
 const pinia = createPinia();
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-  app.component(key, component);
+    app.component(key, component);
 }
 app.use(pinia);
 app.use(router);
