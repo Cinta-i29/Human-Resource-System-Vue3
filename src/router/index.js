@@ -34,9 +34,16 @@ const routes = [
         ],
     },
     {
-        path: "/personelManagement",
-        name: "personelManagement",
+        path: "/personel",
+        name: "personel",
         component: () => import("@/views/PersonelManagement.vue"),
+        children: [
+            {
+                path: "fileRegistration",
+                name: "fileRegistration",
+                component: () => import("@/views/personel/FileRegistration.vue"),
+            },
+        ],
     },
 ];
 

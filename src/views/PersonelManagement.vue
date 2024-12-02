@@ -5,14 +5,15 @@
 <script setup>
 import { onMounted, computed } from "vue";
 import { useUserStore } from "@/store/user";
+import router from "@/router";
 import CommonLayout from "@/layouts/CommonLayout.vue";
 
 const userStore = useUserStore();
 
 const menus = [
     {
-        id: 1,
-        path: "",
+        id: "personel-fileRegistration",
+        path: "/personel/fileRegistration",
         name: "人力资源档案登记",
         children: [],
         roles: ["HR-Specialist"],
@@ -51,11 +52,14 @@ const menuList = computed(() => {
     return menus.filter((menu) => menu.roles.includes(userStore.role));
 });
 
-// 组件挂载时，如果当前路径是 /system，则自动跳转到第一个菜单项
-// onMounted(() => {
-//   if (router.currentRoute.value.path === '/personel') {
-//     router.push(list[0].path);
-//   }
-// });
+// 组件挂载时，如果当前路径是 /personel，则自动跳转到第一个菜单项
+onMounted(() => {
+    if (router.currentRoute.value.path === "/personel") {
+        const firstAvailableMenu = menuList.value[0];
+        if (firstAvailableMenu && firstAvailableMenu.path) {
+            router.push(firstAvailableMenu.path);
+        }
+    }
+});
 </script>
 <style scoped></style>

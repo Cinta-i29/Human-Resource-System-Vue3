@@ -42,11 +42,12 @@ const submitForm = async () => {
         if (res.code === 200) {
             userStore.setUserInfo(res.data);
             localStorage.setItem("token", res.data.token);
+            localStorage.setItem("userId", res.data.userId);
             ElMessage.success("登录成功");
             if (res.data.role === "Administrator") {
                 router.push("/system");
             } else if (res.data.role === "HR-Specialist" || res.data.role === "HR-Manager") {
-                router.push("/personelManagement");
+                router.push("/personel");
             }
         } else {
             ElMessage.error(res.msg || "登录失败");

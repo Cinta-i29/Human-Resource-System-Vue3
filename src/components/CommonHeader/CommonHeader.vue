@@ -35,6 +35,7 @@ const handleCommand = async (command) => {
         if (res.code === 200) {
             userStore.clearUserInfo();
             localStorage.removeItem("token");
+            localStorage.removeItem("userId");
             router.push("/");
             ElMessage.success("退出成功");
         }

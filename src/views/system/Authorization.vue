@@ -45,8 +45,8 @@
                     <el-form-item label="用户角色" prop="role">
                         <el-select v-model="userForm.role" placeholder="请选择用户角色">
                             <el-option
-                                v-for="item in options"
-                                :key="item.value"
+                                v-for="item in roles"
+                                :key="item.id"
                                 :label="item.label"
                                 :value="item.value"
                             />
@@ -65,14 +65,12 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
-import { useUserStore } from "@/store/user";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { getAllUsers, addUser, updateUser, deleteUser } from "@/api/user";
+import { roles } from "@/utils/options";
 
-const userStore = useUserStore();
 const userFormRef = ref(null);
 
-const options = userStore.roleOption;
 const userList = ref([]);
 const dialogVisible = ref(false);
 const dialogTitle = ref("");
@@ -95,7 +93,7 @@ const rules = {
 // 获取所有用户
 const getUsers = async () => {
     const res = await getAllUsers();
-    console.log(res);
+    // console.log(res);
     if (res.code === 200) {
         userList.value = res.data;
     } else {
