@@ -10,7 +10,7 @@
                 v-for="item in level1Options"
                 :key="item.code"
                 :label="item.name"
-                :value="item"
+                :value="item.code"
             />
         </el-select>
 
@@ -25,7 +25,7 @@
                 v-for="item in level2Options"
                 :key="item.code"
                 :label="item.name"
-                :value="item"
+                :value="item.code"
             />
         </el-select>
 
@@ -40,7 +40,7 @@
                 v-for="item in level3Options"
                 :key="item.code"
                 :label="item.name"
-                :value="item"
+                :value="item.code"
             />
         </el-select>
     </div>
@@ -89,8 +89,9 @@ const getOrganizations = async () => {
 const handleLevel1Change = (val) => {
     selectedLevel2.value = null;
     selectedLevel3.value = null;
+    console.log(val);
     if (val) {
-        level2Options.value = val.childrenOrg2 || [];
+        level2Options.value = level1Options.value.find(option => option.code == val).childrenOrg2 || [];
     } else {
         level2Options.value = [];
     }
@@ -102,7 +103,7 @@ const handleLevel1Change = (val) => {
 const handleLevel2Change = (val) => {
     selectedLevel3.value = null;
     if (val) {
-        level3Options.value = val.childrenOrg3 || [];
+        level3Options.value = level2Options.value.find(option => option.code == val).childrenOrg3 || [];
     } else {
         level3Options.value = [];
     }

@@ -97,7 +97,8 @@ const getUsers = async () => {
     if (res.code === 200) {
         userList.value = res.data;
     } else {
-        console.log(res.msg);
+        // console.log(res.msg);
+        ElMessage.error(res.msg);
     }
 };
 

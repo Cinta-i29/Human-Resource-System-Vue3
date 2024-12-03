@@ -22,14 +22,19 @@ const routes = [
                 component: () => import("@/views/system/Organization.vue"),
             },
             {
-                path: "compensation",
-                name: "compensation",
-                component: () => import("@/views/system/Compensation.vue"),
+                path: "salaryItem",
+                name: "salaryItem",
+                component: () => import("@/views/system/SalaryItem.vue"),
             },
             {
                 path: "position",
                 name: "position",
                 component: () => import("@/views/system/Position.vue"),
+            },
+            {
+                path: "salaryStandard",
+                name: "salaryStandard",
+                component: () => import("@/views/system/SalaryStandard.vue"),
             },
         ],
     },

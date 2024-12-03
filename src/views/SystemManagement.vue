@@ -29,9 +29,15 @@ const list = [
         children: [],
     },
     {
-        id: "system-comp",
-        path: "/system/compensation",
+        id: "system-salaryItem",
+        path: "/system/salaryItem",
         name: "薪酬项目管理",
+        children: [],
+    },
+    {
+        id: "system-salaryStandard",
+        path: "/system/salaryStandard",
+        name: "薪酬标准管理",
         children: [],
     },
 ];

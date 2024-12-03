@@ -11,13 +11,12 @@
         </div>
 
         <!-- 机构展示栏 -->
-        <el-table :data="tableData" style="width: 100%; margin-top: 20px" border>
+        <el-table :data="tableData" stripe style="width: 100%; margin-top: 20px" border>
             <el-table-column type="index" label="序号" width="60" />
             <el-table-column prop="level1Name" label="一级机构" />
             <el-table-column prop="level2Name" label="二级机构" />
             <el-table-column prop="level3Name" label="三级机构" />
         </el-table>
-    </div>
 
     <!-- 添加机构对话框 -->
     <el-dialog :title="dialogTitle" v-model="dialogVisible" width="30%">
@@ -75,6 +74,7 @@
             </span>
         </template>
     </el-dialog>
+</div>
 </template>
 
 <script setup>

@@ -4,6 +4,7 @@
             <el-form-item label="所属机构">
                 <OrganizationSelect v-model="selectedOrg" @change="handleOrgChange" />
             </el-form-item>
+            <el-form-item></el-form-item>
         </el-form>
     </div>
 </template>
