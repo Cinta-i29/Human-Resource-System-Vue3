@@ -43,6 +43,8 @@ const submitForm = async () => {
             userStore.setUserInfo(res.data);
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("userId", res.data.userId);
+            localStorage.setItem("role", res.data.role);
+            localStorage.setItem("username", res.data.name);
             ElMessage.success("登录成功");
             if (res.data.role === "Administrator") {
                 router.push("/system");

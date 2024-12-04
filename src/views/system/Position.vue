@@ -7,7 +7,7 @@
         </div>
         <!-- 职位表格 -->
         <div class="position-table">
-            <el-table :data="positionList" stripe>
+            <el-table :data="positions" stripe>
                 <el-table-column label="序号" prop="id"></el-table-column>
                 <el-table-column label="职位名称" prop="name"></el-table-column>
                 <el-table-column label="操作" width="180">
@@ -50,7 +50,7 @@ import { onMounted, ref } from "vue";
 import { getAllPositions, deletePosition, addPosition, updatePosition } from "@/api/position";
 import { ElMessage, ElMessageBox } from "element-plus";
 
-const positionList = ref([]);
+const positions = ref([]);
 const dialogVisible = ref(false);
 const positionForm = ref({
     id: null,
@@ -66,7 +66,7 @@ const rules = {
 const getPositions = async () => {
     const res = await getAllPositions();
     if (res.code === 200) {
-        positionList.value = res.data;
+        positions.value = res.data;
     } else {
         console.log(res.msg);
     }

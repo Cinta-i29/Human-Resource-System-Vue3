@@ -4,12 +4,10 @@
 
 <script setup>
 import { onMounted, computed } from "vue";
-import { useUserStore } from "@/store/user";
 import router from "@/router";
 import CommonLayout from "@/layouts/CommonLayout.vue";
 
-const userStore = useUserStore();
-
+const role = localStorage.getItem("role");
 const menus = [
     {
         id: "personel-fileRegistration",
@@ -49,7 +47,7 @@ const menus = [
 ];
 
 const menuList = computed(() => {
-    return menus.filter((menu) => menu.roles.includes(userStore.role));
+    return menus.filter((menu) => menu.roles.includes(role));
 });
 
 // 组件挂载时，如果当前路径是 /personel，则自动跳转到第一个菜单项

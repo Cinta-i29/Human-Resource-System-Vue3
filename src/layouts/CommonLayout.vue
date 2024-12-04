@@ -41,6 +41,9 @@ defineProps({
 
 .main-container {
     background-color: #f2f2f2;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    padding: 20px;
 }
 
 :deep(.el-header) {

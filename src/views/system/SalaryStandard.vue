@@ -34,7 +34,7 @@
                         </el-table-column>
                     </el-table>
                 </el-form-item>
-                <el-form-item style="margin-top: 20px;">
+                <el-form-item style="margin-top: 20px">
                     <el-button type="primary" @click="submitForm">提交</el-button>
                     <el-button @click="resetForm">重置</el-button>
                 </el-form-item>
@@ -78,7 +78,7 @@ const rules = {
 
 // 添加判断是否可选的方法
 const checkSelectable = (row, index) => {
-    return index !== 0;  // 第一行（索引为0）不可选
+    return index !== 0; // 第一行（索引为0）不可选
 };
 
 // 修改处理表格选择变化的方法
@@ -124,10 +124,10 @@ const submitForm = () => {
                     ElMessage.error(res.msg);
                 }
             } catch (error) {
-                ElMessage.error('添加薪酬标准失败');
+                ElMessage.error("添加薪酬标准失败");
             }
         } else {
-            ElMessage.error('请完善表单信息');
+            ElMessage.error("请完善表单信息");
             return false;
         }
     });

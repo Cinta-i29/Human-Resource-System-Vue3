@@ -89,7 +89,7 @@ const getOrganizations = async () => {
 const handleLevel1Change = (val) => {
     selectedLevel2.value = null;
     selectedLevel3.value = null;
-    console.log(val);
+    // console.log(val);
     if (val) {
         level2Options.value =
             level1Options.value.find((option) => option.code == val).childrenOrg2 || [];

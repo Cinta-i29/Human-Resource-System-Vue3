@@ -29,6 +29,39 @@ export const roles = [
     },
 ];
 
+// 职称选项
+export const jobTitles = [
+    {
+        id: 1,
+        value: "初级",
+        label: "初级",
+    },
+    {
+        id: 2,
+        value: "中级",
+        label: "中级",
+    },
+    {
+        id: 3,
+        value: "高级",
+        label: "高级",
+    },
+];
+
+// 性别选项
+export const genders = [
+    {
+        id: 1,
+        value: "男",
+        label: "男",
+    },
+    {
+        id: 2,
+        value: "女",
+        label: "女",
+    },
+];
+
 // 学历选项
 export const educations = [
     {
@@ -70,6 +103,25 @@ export const educations = [
         id: 8,
         value: "博士研究生",
         label: "博士研究生",
+    },
+];
+
+// 政治面貌
+export const politicalStatusList = [
+    {
+        id: 1,
+        value: "中共党员",
+        label: "中共党员",
+    },
+    {
+        id: 2,
+        value: "共青团员",
+        label: "共青团员",
+    },
+    {
+        id: 3,
+        value: "群众",
+        label: "群众",
     },
 ];
 

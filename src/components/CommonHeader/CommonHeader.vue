@@ -7,7 +7,7 @@
             <span>欢迎，</span>
             <el-dropdown @command="handleCommand">
                 <span class="el-dropdown-link">
-                    {{ userStore.username }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
+                    {{ username }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
@@ -27,6 +27,7 @@ import { ElMessage } from "element-plus";
 import { logout } from "@/api/user";
 
 const userStore = useUserStore();
+const username = localStorage.getItem("username");
 const router = useRouter();
 
 const handleCommand = async (command) => {
@@ -36,6 +37,8 @@ const handleCommand = async (command) => {
             userStore.clearUserInfo();
             localStorage.removeItem("token");
             localStorage.removeItem("userId");
+            localStorage.removeItem("role");
+            localStorage.removeItem("username");
             router.push("/");
             ElMessage.success("退出成功");
         }
