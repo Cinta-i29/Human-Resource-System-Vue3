@@ -124,7 +124,7 @@
                         }}
                     </template>
                 </el-table-column>
-                <el-table-column prop="title" label="职称" />
+                <el-table-column prop="status" label="档案状态" />
                 <el-table-column label="操作" width="200">
                     <template #default="{ row }">
                         <el-button type="primary" text bg @click="handleDetail(row)">
@@ -152,7 +152,6 @@
                     </template>
                 </el-table-column>
             </el-table>
-            <el-dialog> </el-dialog>
         </div>
 
         <!-- 添加编辑对话框 -->
@@ -449,6 +448,7 @@ import {
     getEmployeesByCondition,
     getEmployeesById,
     updateEmployee,
+    deleteEmployeeById
 } from "@/api/employee";
 import { getAllOrganizations, getInfoByOrgId3 } from "@/api/organization";
 import { getAllPositions } from "@/api/position";
@@ -480,6 +480,8 @@ const editFormRef = ref(null);
 const editForm = ref({});
 // 'view' 表示查看模式, 'edit' 表示编辑模式
 const dialogMode = ref("view");
+// 判断是否为查看模式
+const isViewMode = computed(() => dialogMode.value === "view");
 
 // 机构选项
 const organizations = ref([]);
@@ -707,8 +709,8 @@ const handleDelete = (row) => {
     })
         .then(async () => {
             try {
-                // 调用删除API
-                const res = await deleteEmployee(row.id);
+                // console.log(row);
+                const res = await deleteEmployeeById(row.recordNumber);
                 if (res.code === 200) {
                     ElMessage.success("删除成功");
                     getEmployees(); // 重新加载数据
@@ -723,9 +725,6 @@ const handleDelete = (row) => {
             ElMessage.info("已取消删除");
         });
 };
-
-// 在 script setup 中添加
-const isViewMode = computed(() => dialogMode.value === "view");
 
 onMounted(() => {
     getEmployees();

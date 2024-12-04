@@ -34,3 +34,18 @@ export const getEmployeesById = async (id) => {
 export const updateEmployee = async (employee) => {
     return await request.post("/employee/update/s", employee);
 };
+
+// 复核员工档案
+export const reviewEmployee = async (employee) => {
+    return await request.post("/employee/update/m", employee);
+}
+
+// 获取已删除员工档案
+export const getDeletedEmployee = async () => { 
+    return await request.post("/employee/list/deleted");
+}
+
+// 恢复员工档案
+export const recoverEmployeeById = async (id) => { 
+    return await request.post(`/employee/recover/${id}`);
+}

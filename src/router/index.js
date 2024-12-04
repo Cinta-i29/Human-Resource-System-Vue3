@@ -52,10 +52,16 @@ const routes = [
                 path: "queryFile",
                 name: "queryFile",
                 component: () => import("@/views/personel/QueryFile.vue"),
-            }, {
+            },
+            {
                 path: "review",
                 name: "review",
                 component: () => import("@/views/personel/Review.vue"), 
+            },
+            {
+                path: "recover",
+                name: "recover",
+                component: () => import("@/views/personel/Recover.vue"), 
             }
         ],
     },

@@ -31,9 +31,9 @@ const menus = [
         roles: ["HR-Specialist", "HR-Manager"],
     },
     {
-        id: 4,
-        path: "",
-        name: "人力资源档案删除",
+        id: "personel-recover",
+        path: "/personel/recover",
+        name: "人力资源档案恢复",
         children: [],
         roles: ["HR-Manager"],
     },
