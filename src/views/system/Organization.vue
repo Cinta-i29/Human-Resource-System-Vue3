@@ -18,63 +18,50 @@
             <el-table-column prop="level3Name" label="三级机构" />
         </el-table>
 
-    <!-- 添加机构对话框 -->
-    <el-dialog :title="dialogTitle" v-model="dialogVisible" width="30%">
-        <el-form 
-            :model="formData" 
-            :rules="rules"
-            ref="formRef"
-            label-width="120px"
-        >
-            <!-- 机构名称（所有级别都需要） -->
-            <el-form-item label="机构名称" prop="name">
-                <el-input v-model="formData.name" placeholder="请输入机构名称"></el-input>
-            </el-form-item>
+        <!-- 添加机构对话框 -->
+        <el-dialog :title="dialogTitle" v-model="dialogVisible" width="30%">
+            <el-form :model="formData" :rules="rules" ref="formRef" label-width="120px">
+                <!-- 机构名称（所有级别都需要） -->
+                <el-form-item label="机构名称" prop="name">
+                    <el-input v-model="formData.name" placeholder="请输入机构名称"></el-input>
+                </el-form-item>
 
-            <!-- 选择一级机构（仅二级和三级机构需要） -->
-            <el-form-item 
-                v-if="currentLevel > 1" 
-                label="所属一级机构" 
-                prop="firstCode"
-            >
-                <el-select v-model="formData.firstCode" placeholder="请选择一级机构">
-                    <el-option
-                        v-for="org in level1Options"
-                        :key="org.code"
-                        :label="org.name"
-                        :value="org.code"
-                    />
-                </el-select>
-            </el-form-item>
+                <!-- 选择一级机构（仅二级和三级机构需要） -->
+                <el-form-item v-if="currentLevel > 1" label="所属一级机构" prop="firstCode">
+                    <el-select v-model="formData.firstCode" placeholder="请选择一级机构">
+                        <el-option
+                            v-for="org in level1Options"
+                            :key="org.code"
+                            :label="org.name"
+                            :value="org.code"
+                        />
+                    </el-select>
+                </el-form-item>
 
-            <!-- 选择二级机构（仅三级机构需要） -->
-            <el-form-item 
-                v-if="currentLevel === 3" 
-                label="所属二级机构" 
-                prop="secondCode"
-            >
-                <el-select
-                    v-model="formData.secondCode"
-                    placeholder="请选择二级机构"
-                    :disabled="!formData.firstCode"
-                >
-                    <el-option
-                        v-for="org in level2Options"
-                        :key="org.code"
-                        :label="org.name"
-                        :value="org.code"
-                    />
-                </el-select>
-            </el-form-item>
-        </el-form>
-        <template #footer>
-            <span class="dialog-footer">
-                <el-button @click="handleClose">取消</el-button>
-                <el-button type="primary" @click="handleSubmit">确定</el-button>
-            </span>
-        </template>
-    </el-dialog>
-</div>
+                <!-- 选择二级机构（仅三级机构需要） -->
+                <el-form-item v-if="currentLevel === 3" label="所属二级机构" prop="secondCode">
+                    <el-select
+                        v-model="formData.secondCode"
+                        placeholder="请选择二级机构"
+                        :disabled="!formData.firstCode"
+                    >
+                        <el-option
+                            v-for="org in level2Options"
+                            :key="org.code"
+                            :label="org.name"
+                            :value="org.code"
+                        />
+                    </el-select>
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button @click="handleClose">取消</el-button>
+                    <el-button type="primary" @click="handleSubmit">确定</el-button>
+                </span>
+            </template>
+        </el-dialog>
+    </div>
 </template>
 
 <script setup>
@@ -105,15 +92,15 @@ const level2Options = computed(() => {
 
 // 表单验证规则
 const rules = computed(() => ({
-    name: [
-        { required: true, message: '请输入机构名称', trigger: 'blur' }
-    ],
-    firstCode: currentLevel.value > 1 ? [
-        { required: true, message: '请选择一级机构', trigger: 'change' }
-    ] : [],
-    secondCode: currentLevel.value === 3 ? [
-        { required: true, message: '请选择二级机构', trigger: 'change' }
-    ] : []
+    name: [{ required: true, message: "请输入机构名称", trigger: "blur" }],
+    firstCode:
+        currentLevel.value > 1
+            ? [{ required: true, message: "请选择一级机构", trigger: "change" }]
+            : [],
+    secondCode:
+        currentLevel.value === 3
+            ? [{ required: true, message: "请选择二级机构", trigger: "change" }]
+            : [],
 }));
 
 // 获取并处理表格数据
@@ -149,7 +136,7 @@ const getOrganizations = async () => {
 };
 
 // 修改顶部按钮的点击事件
-const handleAdd1 = () => { 
+const handleAdd1 = () => {
     dialogTitle.value = "添加一级机构";
     currentLevel.value = 1;
     formData.value = {
@@ -187,7 +174,7 @@ const handleAdd3 = () => {
 
 // 表单提交处理
 const handleSubmit = async () => {
-    formRef.value?.validate(async (valid) => { 
+    formRef.value?.validate(async (valid) => {
         if (valid) {
             try {
                 const res = await addOrganization(formData.value);
@@ -208,8 +195,7 @@ const handleSubmit = async () => {
             ElMessage.error("请填写完整信息");
             return false;
         }
-    })
-    
+    });
 };
 
 // 对话框关闭前的处理

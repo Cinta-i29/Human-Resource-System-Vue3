@@ -37,7 +37,7 @@ const list = [
     {
         id: "system-salaryStandard",
         path: "/system/salaryStandard",
-        name: "薪酬标准管理",
+        name: "新增薪酬标准",
         children: [],
     },
 ];

@@ -6,6 +6,6 @@ export const getAllOrganizations = async () => {
 };
 
 // 新增机构
-export const addOrganization = async (organization) => { 
+export const addOrganization = async (organization) => {
     return await request.post("/org/add", organization);
-}
+};

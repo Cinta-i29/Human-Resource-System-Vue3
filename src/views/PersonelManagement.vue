@@ -15,7 +15,7 @@ const menus = [
         id: "personel-fileRegistration",
         path: "/personel/fileRegistration",
         name: "人力资源档案登记",
-        children: [], 
+        children: [],
         roles: ["HR-Specialist"],
     },
     {

@@ -91,7 +91,8 @@ const handleLevel1Change = (val) => {
     selectedLevel3.value = null;
     console.log(val);
     if (val) {
-        level2Options.value = level1Options.value.find(option => option.code == val).childrenOrg2 || [];
+        level2Options.value =
+            level1Options.value.find((option) => option.code == val).childrenOrg2 || [];
     } else {
         level2Options.value = [];
     }
@@ -103,7 +104,8 @@ const handleLevel1Change = (val) => {
 const handleLevel2Change = (val) => {
     selectedLevel3.value = null;
     if (val) {
-        level3Options.value = level2Options.value.find(option => option.code == val).childrenOrg3 || [];
+        level3Options.value =
+            level2Options.value.find((option) => option.code == val).childrenOrg3 || [];
     } else {
         level3Options.value = [];
     }
