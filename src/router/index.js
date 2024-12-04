@@ -48,6 +48,15 @@ const routes = [
                 name: "fileRegistration",
                 component: () => import("@/views/personel/FileRegistration.vue"),
             },
+            {
+                path: "queryFile",
+                name: "queryFile",
+                component: () => import("@/views/personel/QueryFile.vue"),
+            }, {
+                path: "review",
+                name: "review",
+                component: () => import("@/views/personel/Review.vue"), 
+            }
         ],
     },
 ];

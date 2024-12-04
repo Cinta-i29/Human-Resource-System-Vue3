@@ -9,3 +9,8 @@ export const getAllOrganizations = async () => {
 export const addOrganization = async (organization) => {
     return await request.post("/org/add", organization);
 };
+
+// 根据三级机构id查询机构信息
+export const getInfoByOrgId3 = async (id) => {
+    return await request.post(`/org/${id}`);
+};
