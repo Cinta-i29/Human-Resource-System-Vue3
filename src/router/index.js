@@ -109,4 +109,26 @@ const router = createRouter({
     routes,
 });
 
+// 添加全局前置守卫
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem('token');
+    
+    // 如果是访问登录页面，直接放行
+    if (to.path === '/') {
+        next();
+        return;
+    }
+    
+    // 检查是否有token
+    if (!token || token.trim() === '') {
+        // 如果没有token，重定向到登录页
+        next('/');
+        return;
+    }
+    
+    // 有token，允许访问
+    next();
+});
+
+
 export default router;
