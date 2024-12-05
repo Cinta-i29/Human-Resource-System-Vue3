@@ -65,6 +65,28 @@ const routes = [
             }
         ],
     },
+    {
+        path: "/salary",
+        name: "salary",
+        component: () => import("@/views/SalaryManagement.vue"),
+        children: [
+            {
+                path: "standardRegistration",
+                name: "standardRegistration",
+                component: () => import("@/views/salary/StandardRegistration.vue")
+            },
+            {
+                path: "queryStandard",
+                name: "queryStandard",
+                component: () => import("@/views/salary/QueryStandard.vue")
+            },
+            {
+                path: "reviewStandard",
+                name: "reviewStandard",
+                component: () => import("@/views/salary/ReviewStandard.vue")
+            }
+        ]
+    }
 ];
 
 const router = createRouter({

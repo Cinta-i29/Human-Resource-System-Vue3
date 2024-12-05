@@ -50,6 +50,8 @@ const submitForm = async () => {
                 router.push("/system");
             } else if (res.data.role === "HR-Specialist" || res.data.role === "HR-Manager") {
                 router.push("/personel");
+            } else if (res.data.role === "Salary-Specialist" || res.data.role === "Salary-Manager") {
+                router.push("/salary");
             }
         } else {
             ElMessage.error(res.msg || "登录失败");
