@@ -8,8 +8,30 @@
                 <el-table-column label="档案编号" prop="employeeId" />
                 <el-table-column label="员工姓名" prop="employeeName" />
                 <el-table-column label="薪酬标准总额" prop="salaryStandardTotalMoney" />
-                <el-table-column label="奖励奖金" prop="awardMoney" />
-                <el-table-column label="应扣奖金" prop="deductionMoney" />
+                <el-table-column label="奖励奖金" width="180">
+                    <template #default="{ row }">
+                        <el-input-number 
+                            v-model="row.awardMoney"
+                            :min="0"
+                            :precision="2"
+                            :controls="false"
+                            @change="handleMoneyChange(row)"
+                            placeholder="请输入奖励金额"
+                        />
+                    </template>
+                </el-table-column>
+                <el-table-column label="应扣奖金" width="180">
+                    <template #default="{ row }">
+                        <el-input-number
+                            v-model="row.deductionMoney" 
+                            :min="0"
+                            :precision="2"
+                            :controls="false"
+                            @change="handleMoneyChange(row)"
+                            placeholder="请输入应扣金额"
+                        />
+                    </template>
+                </el-table-column>
                 <el-table-column label="账单总额" prop="billTotalMoney" />
                 <el-table-column label="复核建议" width="200">
                     <template #default="{ row }">
@@ -50,12 +72,23 @@ const getBillsList = async () => {
     }
 };
 
+const handleMoneyChange = (row) => {
+    row.billTotalMoney = Number(row.salaryStandardTotalMoney) + 
+        Number(row.awardMoney || 0) - 
+        Number(row.deductionMoney || 0);
+};
+
 const handleReview = async (row) => {
-    console.log(row);
+    if (row.awardMoney < 0 || row.deductionMoney < 0) {
+        ElMessage.error('金额不能为负数');
+        return;
+    }
+    
     const billForm = {
         id: row.id,
         awardMoney: row.awardMoney,
         deductionMoney: row.deductionMoney,
+        billTotalMoney: row.billTotalMoney,
         reviewOpinion: row.reviewOpinion,
     };
 

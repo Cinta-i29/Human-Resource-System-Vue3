@@ -107,7 +107,7 @@ const handleDelete = async (salaryItem) => {
                 ElMessage.success("删除成功");
                 getSalaryItems();
             } else {
-                ElMessage.success(res.msg);
+                ElMessage.error(res.msg);
             }
         } catch (error) {
             ElMessage.error("删除失败");
