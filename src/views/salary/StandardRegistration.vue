@@ -80,6 +80,7 @@
 import { ref, onMounted, computed } from 'vue';
 import { getAllSalaryStandards, registerSalaryStandard } from '@/api/salaryStandard';
 import { getUserInfoById } from '@/api/user';
+import { formatDateTime } from '@/utils/format';
 import { ElMessage } from 'element-plus';
 
 const salaryStandardList = ref([]);
@@ -87,12 +88,6 @@ const salaryStandard = ref({});
 const dialogVisible = ref(false);
 const creator = ref("");
 
-// 添加时间格式化函数
-const formatDateTime = (dateTimeString) => {
-    if (!dateTimeString) return '';
-    const date = new Date(dateTimeString);
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
-}
 
 // 获取待登记的薪酬标准
 const getSalaryStandards1 = async () => { 

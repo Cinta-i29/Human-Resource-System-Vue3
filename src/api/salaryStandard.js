@@ -24,3 +24,8 @@ export const queryStandardByCondition = async (condition) => {
 export const reviewStandard = async (standardForm) => { 
     return await request.post("/salaryStandard/review", standardForm);
 }
+
+// 根据档案编号获取薪酬标准项目
+export const getStandardByEmployeeId = async (empId) => {
+    return await request.get(`/salaryStandard/get/${empId}`)
+}

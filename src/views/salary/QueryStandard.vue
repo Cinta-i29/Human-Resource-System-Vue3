@@ -131,6 +131,7 @@
 import { reactive, ref, onMounted } from 'vue';
 import { queryStandardByCondition } from '@/api/salaryStandard';
 import { getUserInfoById } from '@/api/user';
+import { formatDateTime } from '@/utils/format';
 import { ElMessage } from 'element-plus';
 
 const dateRange = ref([]);
@@ -147,12 +148,7 @@ const searchForm = reactive({
 const dialogVisible = ref(false);
 const currentStandard = ref({});
 
-// 时间格式化函数
-const formatDateTime = (dateTimeString) => {
-    if (!dateTimeString) return '';
-    const date = new Date(dateTimeString);
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
-}
+
 
 // 获取状态对应的类型
 const getStatusType = (status) => {

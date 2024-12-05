@@ -31,11 +31,11 @@ const menus = [
         roles: ["Salary-Manager", "Salary-Specialist"],
     },
     {
-        id: "personel-recover",
-        path: "/personel/recover",
-        name: "人力资源档案恢复",
+        id: "salary-billRegistration",
+        path: "/salary/billRegistration",
+        name: "薪酬发放登记",
         children: [],
-        roles: ["HR-Manager"],
+        roles: ["Salary-Specialist"],
     },
 ];
 
