@@ -6,7 +6,7 @@
         <div class="table">
             <el-table :data="bills" stripe border>
                 <el-table-column label="档案编号" prop="employeeId" />
-                <!-- <el-table-column label="员工姓名" prop="name" /> -->
+                <el-table-column label="员工姓名" prop="employeeName" />
                 <el-table-column label="薪酬标准总额" prop="salaryStandardTotalMoney" />
                 <el-table-column label="奖励奖金" prop="awardMoney" />
                 <el-table-column label="应扣奖金" prop="deductionMoney" />
