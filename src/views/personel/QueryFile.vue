@@ -448,7 +448,7 @@ import {
     getEmployeesByCondition,
     getEmployeesById,
     updateEmployee,
-    deleteEmployeeById
+    deleteEmployeeById,
 } from "@/api/employee";
 import { getAllOrganizations, getInfoByOrgId3 } from "@/api/organization";
 import { getAllPositions } from "@/api/position";
@@ -498,9 +498,7 @@ const level2Options = computed(() => {
 const level3Options = computed(() => {
     if (!searchForm.secondCode) return [];
     const level1Org = organizations.value.find((org) => org.code === searchForm.firstCode);
-    const level2Org = level1Org?.childrenOrg2?.find(
-        (org) => org.code === searchForm.secondCode,
-    );
+    const level2Org = level1Org?.childrenOrg2?.find((org) => org.code === searchForm.secondCode);
     return level2Org?.childrenOrg3 || [];
 });
 

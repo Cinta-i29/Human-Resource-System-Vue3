@@ -31,6 +31,6 @@ export const updateUser = async (user) => {
 };
 
 // 根据id获取用户信息
-export const getUserInfoById = async (userId) => { 
-    return await request.get(`/user/${userId}`)
-}
+export const getUserInfoById = async (userId) => {
+    return await request.get(`/user/${userId}`);
+};

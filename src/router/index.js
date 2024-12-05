@@ -56,13 +56,13 @@ const routes = [
             {
                 path: "review",
                 name: "review",
-                component: () => import("@/views/personel/Review.vue"), 
+                component: () => import("@/views/personel/Review.vue"),
             },
             {
                 path: "recover",
                 name: "recover",
-                component: () => import("@/views/personel/Recover.vue"), 
-            }
+                component: () => import("@/views/personel/Recover.vue"),
+            },
         ],
     },
     {
@@ -73,25 +73,35 @@ const routes = [
             {
                 path: "standardRegistration",
                 name: "standardRegistration",
-                component: () => import("@/views/salary/StandardRegistration.vue")
+                component: () => import("@/views/salary/StandardRegistration.vue"),
             },
             {
                 path: "queryStandard",
                 name: "queryStandard",
-                component: () => import("@/views/salary/QueryStandard.vue")
+                component: () => import("@/views/salary/QueryStandard.vue"),
             },
             {
                 path: "reviewStandard",
                 name: "reviewStandard",
-                component: () => import("@/views/salary/ReviewStandard.vue")
+                component: () => import("@/views/salary/ReviewStandard.vue"),
             },
             {
                 path: "billRegistration",
                 name: "billRegistration",
-                component: () => import("@/views/salary/BillRegistration.vue")
-            }
-        ]
-    }
+                component: () => import("@/views/salary/BillRegistration.vue"),
+            },
+            {
+                path: "reviewBill",
+                name: "reviewBill",
+                component: () => import("@/views/salary/ReviewBill.vue"),
+            },
+            {
+                path: "queryBill",
+                name: "queryBill",
+                component: () => import("@/views/salary/QueryBill.vue"),
+            },
+        ],
+    },
 ];
 
 const router = createRouter({

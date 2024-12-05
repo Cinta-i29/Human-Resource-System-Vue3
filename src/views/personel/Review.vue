@@ -1,47 +1,42 @@
 <template>
-  <div>
-    <div class="operation-area">
-        <span class="operation-title">人力资源档案审核</span>
-    </div>
+    <div>
+        <div class="operation-area">
+            <span class="operation-title">人力资源档案审核</span>
+        </div>
 
-    <div class="table">
-        <el-table :data="employees" stripe boder>
-            <el-table-column label="档案编号" prop="recordNumber" />
-            <el-table-column label="姓名" prop="name" />
-            <el-table-column prop="firstOrgName" label="一级机构" />
-            <el-table-column prop="secondOrgName" label="二级机构" />
-            <el-table-column prop="thirdOrgName" label="三级机构" />
-            <el-table-column prop="positionId" label="职位名称">
-                <template #default="{ row }">
-                    {{
-                        positions.find((position) => position.id === row.positionId)?.name ||
-                        "-"
-                    }}
-                </template>
-            </el-table-column>
-            <el-table-column label="复核" width="200">
-                <template #default="{ row }">
-                    <el-button type="primary" text bg @click="handleReview(row)">
-                        复核
-                    </el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-    </div>
+        <div class="table">
+            <el-table :data="employees" stripe boder>
+                <el-table-column label="档案编号" prop="recordNumber" />
+                <el-table-column label="姓名" prop="name" />
+                <el-table-column prop="firstOrgName" label="一级机构" />
+                <el-table-column prop="secondOrgName" label="二级机构" />
+                <el-table-column prop="thirdOrgName" label="三级机构" />
+                <el-table-column prop="positionId" label="职位名称">
+                    <template #default="{ row }">
+                        {{
+                            positions.find((position) => position.id === row.positionId)?.name ||
+                            "-"
+                        }}
+                    </template>
+                </el-table-column>
+                <el-table-column label="复核" width="200">
+                    <template #default="{ row }">
+                        <el-button type="primary" text bg @click="handleReview(row)">
+                            复核
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
 
-    <!-- 复核对话框 -->
-    <el-dialog
+        <!-- 复核对话框 -->
+        <el-dialog
             v-model="dialogVisible"
             title="复核员工档案"
             width="80%"
             :before-close="handleDialogClose"
         >
-            <el-form
-                :model="editForm"
-                :rules="rules"
-                ref="editFormRef"
-                label-width="100px"
-            >
+            <el-form :model="editForm" :rules="rules" ref="editFormRef" label-width="100px">
                 <el-row :gutter="20">
                     <el-col :span="8">
                         <el-form-item label="档案编号">
@@ -68,11 +63,7 @@
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="性别" prop="gender">
-                            <el-select
-                                v-model="editForm.gender"
-                                placeholder="请选择性别"
-                            
-                            >
+                            <el-select v-model="editForm.gender" placeholder="请选择性别">
                                 <el-option
                                     v-for="gender in genders"
                                     :key="gender.value"
@@ -84,11 +75,7 @@
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="职称" prop="title">
-                            <el-select
-                                v-model="editForm.title"
-                                placeholder="请选择职称"
-                            
-                            >
+                            <el-select v-model="editForm.title" placeholder="请选择职称">
                                 <el-option
                                     v-for="title in jobTitles"
                                     :key="title.value"
@@ -109,26 +96,17 @@
                                 placeholder="请选择出生日期"
                                 format="YYYY/MM/DD"
                                 value-format="YYYY-MM-DD"
-                            
                             />
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="年龄" prop="age">
-                            <el-input
-                                v-model.number="editForm.age"
-                                type="text"
-                            
-                            />
+                            <el-input v-model.number="editForm.age" type="text" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="民族" prop="ethnicity">
-                            <el-select
-                                v-model="editForm.ethnicity"
-                                placeholder="请选择民族"
-                            
-                            >
+                            <el-select v-model="editForm.ethnicity" placeholder="请选择民族">
                                 <el-option
                                     v-for="nationalitie in nationalities"
                                     :key="nationalitie.value"
@@ -146,7 +124,6 @@
                             <el-select
                                 v-model="editForm.politicalStatus"
                                 placeholder="请选择政治面貌"
-                            
                             >
                                 <el-option
                                     v-for="status in politicalStatusList"
@@ -164,10 +141,7 @@
                     </el-col>
                     <el-col :span="8">
                         <el-form-item label="社保号码" prop="socialSecurityNumber">
-                            <el-input
-                                v-model="editForm.socialSecurityNumber"
-                            
-                            />
+                            <el-input v-model="editForm.socialSecurityNumber" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -175,11 +149,7 @@
                 <el-row :gutter="20">
                     <el-col :span="8">
                         <el-form-item label="学历" prop="education">
-                            <el-select
-                                v-model="editForm.education"
-                                placeholder="请选择学历"
-                            
-                            >
+                            <el-select v-model="editForm.education" placeholder="请选择学历">
                                 <el-option
                                     v-for="education in educations"
                                     :key="education.value"
@@ -271,12 +241,7 @@
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="个人履历" prop="resume">
-                            <el-input
-                                v-model="editForm.resume"
-                                type="textarea"
-                                :rows="4"
-                            
-                            />
+                            <el-input v-model="editForm.resume" type="textarea" :rows="4" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -284,11 +249,7 @@
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="家庭关系" prop="familyInfo">
-                            <el-input
-                                v-model="editForm.familyInfo"
-                                type="textarea"
-                                :rows="4"
-                            />
+                            <el-input v-model="editForm.familyInfo" type="textarea" :rows="4" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -296,11 +257,7 @@
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="备注" prop="remarks">
-                            <el-input
-                                v-model="editForm.remarks"
-                                type="textarea"
-                                :rows="4"
-                            />
+                            <el-input v-model="editForm.remarks" type="textarea" :rows="4" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -308,11 +265,7 @@
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="审核意见" prop="reviewOpinions">
-                            <el-input
-                                v-model="editForm.reviewOpinions"
-                                type="textarea"
-                                :rows="4"
-                            />
+                            <el-input v-model="editForm.reviewOpinions" type="textarea" :rows="4" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -324,14 +277,11 @@
                 </span>
             </template>
         </el-dialog>
-  </div>
+    </div>
 </template>
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import {
-    getAllEmployees,
-    reviewEmployee,
-} from "@/api/employee";
+import { getAllEmployees, reviewEmployee } from "@/api/employee";
 import { getInfoByOrgId3 } from "@/api/organization";
 import { getAllPositions } from "@/api/position";
 import { ElMessage } from "element-plus";
@@ -396,10 +346,10 @@ const getPositionName = computed(() => {
 });
 
 // 复核处理函数
-const handleReview = async (row) => { 
+const handleReview = async (row) => {
     editForm.value = employees.value.find((employee) => employee.recordNumber === row.recordNumber);
     dialogVisible.value = true;
-}
+};
 
 // 关闭对话框
 const handleDialogClose = () => {

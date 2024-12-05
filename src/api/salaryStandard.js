@@ -11,21 +11,21 @@ export const getAllSalaryStandards = async (type) => {
 };
 
 // 登记薪酬标准
-export const registerSalaryStandard = async (standardForm) => { 
+export const registerSalaryStandard = async (standardForm) => {
     return await request.post("/salaryStandard/register", standardForm);
-}
+};
 
 // 条件查询薪酬标准
-export const queryStandardByCondition = async (condition) => { 
-    return await request.post("/salaryStandard/search", condition)
-}
+export const queryStandardByCondition = async (condition) => {
+    return await request.post("/salaryStandard/search", condition);
+};
 
 // 复核薪酬标准
-export const reviewStandard = async (standardForm) => { 
+export const reviewStandard = async (standardForm) => {
     return await request.post("/salaryStandard/review", standardForm);
-}
+};
 
 // 根据档案编号获取薪酬标准项目
 export const getStandardByEmployeeId = async (empId) => {
-    return await request.get(`/salaryStandard/get/${empId}`)
-}
+    return await request.get(`/salaryStandard/get/${empId}`);
+};

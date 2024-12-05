@@ -37,6 +37,20 @@ const menus = [
         children: [],
         roles: ["Salary-Specialist"],
     },
+    {
+        id: "salary-reviewBill",
+        path: "/salary/reviewBill",
+        name: "薪酬发放复核",
+        children: [],
+        roles: ["Salary-Manager"],
+    },
+    {
+        id: "salary-queryBill",
+        path: "/salary/queryBill",
+        name: "薪酬发放查询",
+        children: [],
+        roles: ["Salary-Manager", "Salary-Specialist"],
+    },
 ];
 
 const menuList = computed(() => {

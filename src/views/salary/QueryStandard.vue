@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div class="operation-area">
-        <span class="operation-title">薪酬标准查询</span>
-    </div>
-    <div class="search-area">
+    <div>
+        <div class="operation-area">
+            <span class="operation-title">薪酬标准查询</span>
+        </div>
+        <div class="search-area">
             <el-form :model="searchForm">
                 <el-row :gutter="20">
                     <el-col :span="8">
@@ -48,7 +48,7 @@
                 <el-table-column label="名称" prop="name" />
                 <el-table-column label="制定人" width="120">
                     <template #default="{ row }">
-                        {{ creatorMap[row.creatorId] || '加载中...' }}
+                        {{ creatorMap[row.creatorId] || "加载中..." }}
                     </template>
                 </el-table-column>
                 <el-table-column label="制定时间" width="180">
@@ -63,19 +63,13 @@
                 </el-table-column>
                 <el-table-column label="操作" width="120" fixed="right">
                     <template #default="{ row }">
-                        <el-button type="primary" link @click="handleView(row)">
-                            查看
-                        </el-button>
+                        <el-button type="primary" link @click="handleView(row)"> 查看 </el-button>
                     </template>
                 </el-table-column>
             </el-table>
         </div>
 
-        <el-dialog
-            v-model="dialogVisible"
-            title="薪酬标准详情"
-            width="60%"
-        >
+        <el-dialog v-model="dialogVisible" title="薪酬标准详情" width="60%">
             <div class="salary-info">
                 <div class="info-item">
                     <span class="label">薪酬标准编号：</span>
@@ -83,7 +77,7 @@
                 </div>
                 <div class="info-item">
                     <span class="label">制定人：</span>
-                    <span>{{ creatorMap[currentStandard.creatorId] || '加载中...' }}</span>
+                    <span>{{ creatorMap[currentStandard.creatorId] || "加载中..." }}</span>
                 </div>
                 <div class="info-item">
                     <span class="label">创建时间：</span>
@@ -91,7 +85,7 @@
                 </div>
                 <div class="info-item" v-if="currentStandard.registrarId">
                     <span class="label">登记人：</span>
-                    <span>{{ creatorMap[currentStandard.registrarId] || '加载中...' }}</span>
+                    <span>{{ creatorMap[currentStandard.registrarId] || "加载中..." }}</span>
                 </div>
                 <div class="info-item" v-if="currentStandard.registrarAt">
                     <span class="label">登记时间：</span>
@@ -99,7 +93,7 @@
                 </div>
                 <div class="info-item" v-if="currentStandard.reviewId">
                     <span class="label">复核人：</span>
-                    <span>{{ creatorMap[currentStandard.reviewId] || '加载中...' }}</span>
+                    <span>{{ creatorMap[currentStandard.reviewId] || "加载中..." }}</span>
                 </div>
                 <div class="info-item" v-if="currentStandard.reviewAt">
                     <span class="label">复核时间：</span>
@@ -115,24 +109,24 @@
                 <el-table-column label="项目名称" prop="name" />
                 <el-table-column label="扣款项" width="120">
                     <template #default="{ row }">
-                        {{ row.isDeduction ? '是' : '否' }}
+                        {{ row.isDeduction ? "是" : "否" }}
                     </template>
                 </el-table-column>
                 <el-table-column label="金额" width="200">
                     <template #default="{ row }">
-                        <span>{{ row.money?.toFixed(2) || '0.00' }}</span>
+                        <span>{{ row.money?.toFixed(2) || "0.00" }}</span>
                     </template>
                 </el-table-column>
             </el-table>
         </el-dialog>
-  </div>
+    </div>
 </template>
 <script setup>
-import { reactive, ref, onMounted } from 'vue';
-import { queryStandardByCondition } from '@/api/salaryStandard';
-import { getUserInfoById } from '@/api/user';
-import { formatDateTime } from '@/utils/format';
-import { ElMessage } from 'element-plus';
+import { reactive, ref, onMounted } from "vue";
+import { queryStandardByCondition } from "@/api/salaryStandard";
+import { getUserInfoById } from "@/api/user";
+import { formatDateTime } from "@/utils/format";
+import { ElMessage } from "element-plus";
 
 const dateRange = ref([]);
 const standardList = ref([]); // 表格数据
@@ -142,39 +136,37 @@ const searchForm = reactive({
     id: "",
     keywords: "",
     startTime: "",
-    endTime: ""
-})
+    endTime: "",
+});
 
 const dialogVisible = ref(false);
 const currentStandard = ref({});
 
-
-
 // 获取状态对应的类型
 const getStatusType = (status) => {
-  switch (status) {
-    case '待登记':
-      return 'info';
-    case '待复核':
-      return 'warning';
-    case '正常':
-      return 'success';
-    default:
-      return '';
-  }
-}
+    switch (status) {
+        case "待登记":
+            return "info";
+        case "待复核":
+            return "warning";
+        case "正常":
+            return "success";
+        default:
+            return "";
+    }
+};
 
 // 获取制定人信息
 const getCreatorInfo = async (creatorId) => {
     try {
-      const res = await getUserInfoById(creatorId);
-      if (res.code === 200) {
-        creatorMap.value[creatorId] = res.data.name;
-      }
+        const res = await getUserInfoById(creatorId);
+        if (res.code === 200) {
+            creatorMap.value[creatorId] = res.data.name;
+        }
     } catch (error) {
-      console.error('获取制定人信息失败:', error);
+        console.error("获取制定人信息失败:", error);
     }
-}
+};
 
 const handleSearch = async () => {
     searchForm.startTime = dateRange.value?.[0] || "";
@@ -184,27 +176,27 @@ const handleSearch = async () => {
     if (res.code === 200) {
         standardList.value = res.data;
         // 获取所有制定人的信息
-        const creatorIds = [...new Set(res.data.map(item => item.creatorId))];
-        creatorIds.forEach(id => getCreatorInfo(id));
+        const creatorIds = [...new Set(res.data.map((item) => item.creatorId))];
+        creatorIds.forEach((id) => getCreatorInfo(id));
     } else {
-        ElMessage.error(res.msg || '查询失败');
+        ElMessage.error(res.msg || "查询失败");
     }
-}
+};
 
-const handleReset = () => { 
+const handleReset = () => {
     searchForm.id = "";
     searchForm.keywords = "";
     searchForm.startTime = "";
     searchForm.endTime = "";
     dateRange.value = [];
     handleSearch(); // 重置后自动查询
-}
+};
 
 // 查看详情
 const handleView = async (row) => {
     currentStandard.value = JSON.parse(JSON.stringify(row));
     dialogVisible.value = true;
-    
+
     // 获取所有需要的用户信息
     try {
         // 获取制定人信息
@@ -214,7 +206,7 @@ const handleView = async (row) => {
                 creatorMap.value[row.creatorId] = creatorRes.data.name;
             }
         }
-        
+
         // 获取登记人信息
         if (row.registrarId) {
             const registrarRes = await getUserInfoById(row.registrarId);
@@ -222,7 +214,7 @@ const handleView = async (row) => {
                 creatorMap.value[row.registrarId] = registrarRes.data.name;
             }
         }
-        
+
         // 获取复核人信息
         if (row.reviewId) {
             const reviewerRes = await getUserInfoById(row.reviewId);
@@ -231,15 +223,15 @@ const handleView = async (row) => {
             }
         }
     } catch (error) {
-        console.error('获取用户信息失败:', error);
-        ElMessage.error('获取用户信息失败');
+        console.error("获取用户信息失败:", error);
+        ElMessage.error("获取用户信息失败");
     }
-}
+};
 
 // 初始化时执行一次查询
 onMounted(() => {
     handleSearch();
-})
+});
 </script>
 <style scoped>
 .operation-area {

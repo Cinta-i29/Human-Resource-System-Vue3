@@ -1,41 +1,38 @@
 <template>
-  <div>
-    <div class="operation-area">
-        <span class="operation-title">人力资源档案恢复</span>
-    </div>
+    <div>
+        <div class="operation-area">
+            <span class="operation-title">人力资源档案恢复</span>
+        </div>
 
-    <div class="table">
-        <el-table :data="employees" stripe boder>
-            <el-table-column label="档案编号" prop="recordNumber" />
-            <el-table-column label="姓名" prop="name" />
-            <el-table-column prop="firstOrgName" label="一级机构" />
-            <el-table-column prop="secondOrgName" label="二级机构" />
-            <el-table-column prop="thirdOrgName" label="三级机构" />
-            <el-table-column prop="positionId" label="职位名称">
-                <template #default="{ row }">
-                    {{
-                        positions.find((position) => position.id === row.positionId)?.name ||
-                        "-"
-                    }}
-                </template>
-            </el-table-column>
-            <el-table-column label="复核" width="200">
-                <template #default="{ row }">
-                    <el-button type="primary" text bg @click="handleRecover(row)">
-                        恢复
-                    </el-button>
-                </template>
-            </el-table-column>
-        </el-table>
+        <div class="table">
+            <el-table :data="employees" stripe boder>
+                <el-table-column label="档案编号" prop="recordNumber" />
+                <el-table-column label="姓名" prop="name" />
+                <el-table-column prop="firstOrgName" label="一级机构" />
+                <el-table-column prop="secondOrgName" label="二级机构" />
+                <el-table-column prop="thirdOrgName" label="三级机构" />
+                <el-table-column prop="positionId" label="职位名称">
+                    <template #default="{ row }">
+                        {{
+                            positions.find((position) => position.id === row.positionId)?.name ||
+                            "-"
+                        }}
+                    </template>
+                </el-table-column>
+                <el-table-column label="复核" width="200">
+                    <template #default="{ row }">
+                        <el-button type="primary" text bg @click="handleRecover(row)">
+                            恢复
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
     </div>
-  </div>
 </template>
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import {
-    getDeletedEmployee,
-    recoverEmployeeById,
-} from "@/api/employee";
+import { getDeletedEmployee, recoverEmployeeById } from "@/api/employee";
 import { getInfoByOrgId3 } from "@/api/organization";
 import { getAllPositions } from "@/api/position";
 import { ElMessage } from "element-plus";
@@ -43,9 +40,8 @@ import { ElMessage } from "element-plus";
 const positions = ref([]);
 const employees = ref([]);
 
-
 // 恢复处理函数
-const handleRecover = async (row) => { 
+const handleRecover = async (row) => {
     ElMessageBox.confirm("确定要恢复该档案吗？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -68,7 +64,7 @@ const handleRecover = async (row) => {
         .catch(() => {
             ElMessage.info("已取消恢复");
         });
-}
+};
 
 // 获取所有职位
 const getPositions = async () => {

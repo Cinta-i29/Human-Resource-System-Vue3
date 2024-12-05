@@ -93,23 +93,29 @@
         </div>
 
         <!-- 添加薪酬标准详情对话框 -->
-        <el-dialog
-            v-model="dialogVisible"
-            title="薪酬标准详情"
-            width="600px"
-        >
+        <el-dialog v-model="dialogVisible" title="薪酬标准详情" width="600px">
             <!-- 添加员工基本信息 -->
             <el-descriptions :column="2" border>
-                <el-descriptions-item label="员工姓名">{{ currentEmployee?.name }}</el-descriptions-item>
-                <el-descriptions-item label="档案编号">{{ currentEmployee?.recordNumber }}</el-descriptions-item>
+                <el-descriptions-item label="员工姓名">{{
+                    currentEmployee?.name
+                }}</el-descriptions-item>
+                <el-descriptions-item label="档案编号">{{
+                    currentEmployee?.recordNumber
+                }}</el-descriptions-item>
             </el-descriptions>
 
             <!-- 原有的薪酬标准信息 -->
             <el-descriptions :column="2" border style="margin-top: 20px">
-                <el-descriptions-item label="标准名称">{{ currentStandard.name }}</el-descriptions-item>
-                <el-descriptions-item label="状态">{{ currentStandard.status }}</el-descriptions-item>
+                <el-descriptions-item label="标准名称">{{
+                    currentStandard.name
+                }}</el-descriptions-item>
+                <el-descriptions-item label="状态">{{
+                    currentStandard.status
+                }}</el-descriptions-item>
                 <el-descriptions-item label="复核人">{{ reviewerName }}</el-descriptions-item>
-                <el-descriptions-item label="复核时间">{{ formatDateTime(currentStandard.reviewAt) }}</el-descriptions-item>
+                <el-descriptions-item label="复核时间">{{
+                    formatDateTime(currentStandard.reviewAt)
+                }}</el-descriptions-item>
             </el-descriptions>
 
             <el-table :data="currentStandard.salaryItemMoneyVoList" style="margin-top: 20px">
@@ -117,13 +123,13 @@
                 <el-table-column label="金额" prop="money">
                     <template #default="{ row }">
                         <span :style="{ color: row.isDeduction ? '#f56c6c' : '#67c23a' }">
-                            {{ row.isDeduction ? '-' : '+' }}{{ row.money.toFixed(2) }}
+                            {{ row.isDeduction ? "-" : "+" }}{{ row.money.toFixed(2) }}
                         </span>
                     </template>
                 </el-table-column>
                 <el-table-column label="类型" prop="isDeduction">
                     <template #default="{ row }">
-                        {{ row.isDeduction ? '扣除项' : '发放项' }}
+                        {{ row.isDeduction ? "扣除项" : "发放项" }}
                     </template>
                 </el-table-column>
             </el-table>
@@ -133,17 +139,13 @@
                 <el-row :gutter="20">
                     <el-col :span="12">
                         <el-form-item label="奖励奖金">
-                            <el-input-number 
-                                v-model="bonusForm.reward" 
-                                :min="0"
-                                :precision="2"
-                            />
+                            <el-input-number v-model="bonusForm.reward" :min="0" :precision="2" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="应扣奖金">
-                            <el-input-number 
-                                v-model="bonusForm.deduction" 
+                            <el-input-number
+                                v-model="bonusForm.deduction"
                                 :min="0"
                                 :precision="2"
                             />
@@ -263,27 +265,25 @@ const handleReset = () => {
 
 const dialogVisible = ref(false);
 const currentStandard = ref({
-    name: '',
-    status: '',
-    reviewComment: '',
-    registrarAt: '',
-    salaryItemMoneyVoList: []
+    name: "",
+    status: "",
+    reviewComment: "",
+    registrarAt: "",
+    salaryItemMoneyVoList: [],
 });
-const reviewerName = ref('');
+const reviewerName = ref("");
 
 // 添加奖金表单数据
 const bonusForm = reactive({
     reward: 0,
-    deduction: 0
+    deduction: 0,
 });
 
 // 计算标准总额（不含奖金）
 const standardTotal = computed(() => {
     if (!currentStandard.value.salaryItemMoneyVoList) return 0;
     return currentStandard.value.salaryItemMoneyVoList.reduce((total, item) => {
-        return item.isDeduction 
-            ? total - item.money 
-            : total + item.money;
+        return item.isDeduction ? total - item.money : total + item.money;
     }, 0);
 });
 
@@ -313,11 +313,11 @@ const handleRegister = async (row) => {
             }
             dialogVisible.value = true;
         } else {
-            ElMessage.warning('未找到该员工的薪酬标准信息');
+            ElMessage.warning("未找到该员工的薪酬标准信息");
         }
     } catch (error) {
         console.error(error);
-        ElMessage.error('获取薪酬标准信息失败');
+        ElMessage.error("获取薪酬标准信息失败");
     }
 };
 
@@ -328,22 +328,22 @@ const handleSubmitRegister = async () => {
             employeeId: currentEmployee.value.recordNumber,
             salaryStandardId: currentStandard.value.id,
             awardMoney: bonusForm.reward,
-            deductionMoney: bonusForm.deduction
+            deductionMoney: bonusForm.deduction,
         };
 
         const res = await registerBill(params);
         console.log(res);
         if (res.code === 200) {
-            ElMessage.success('登记成功');
+            ElMessage.success("登记成功");
             dialogVisible.value = false;
             // 刷新列表
             getRegisterBills();
         } else {
-            ElMessage.error(res.msg || '登记失败');
+            ElMessage.error(res.msg || "登记失败");
         }
     } catch (error) {
         console.error(error);
-        ElMessage.error('登记失败');
+        ElMessage.error("登记失败");
     }
 };
 
@@ -385,7 +385,7 @@ onMounted(() => {
 }
 
 .salary-total {
-    border-top: 1px solid #EBEEF5;
+    border-top: 1px solid #ebeef5;
     padding-top: 20px;
 }
 
