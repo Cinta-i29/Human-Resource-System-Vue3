@@ -100,7 +100,7 @@ const handleDelete = async (row) => {
                 ElMessage.success("删除成功");
                 getPositions();
             } else {
-                ElMessage.success(res.msg);
+                ElMessage.error(res.msg);
             }
         } catch (error) {
             ElMessage.error("删除失败");
